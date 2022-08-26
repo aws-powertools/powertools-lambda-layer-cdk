@@ -1,9 +1,9 @@
 {
-  "name": "cdk-lambda-powertools-python-layer",
-  "description": "A lambda layer for AWS Powertools for python",
+  "name": "cdk-aws-lambda-powertools-layer",
+  "description": "A lambda layer for AWS Powertools for python and typescript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aws-samples/cdk-lambda-powertools-python-layer.git"
+    "url": "https://github.com/awslabs/cdk-aws-lambda-powertools-layer.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -71,8 +71,10 @@
     "devax",
     "lambda",
     "layer",
+    "nodejs",
     "powertools",
-    "python"
+    "python",
+    "typescript"
   ],
   "main": "lib/index.js",
   "license": "MIT-0",
@@ -123,8 +125,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "cdk-lambda-powertools-python-layer",
-        "module": "cdk_lambda_powertools_python_layer"
+        "distName": "cdk-aws-lambda-powertools-layer",
+        "module": "cdk_aws_lambda_powertools_layer"
       }
     },
     "tsc": {

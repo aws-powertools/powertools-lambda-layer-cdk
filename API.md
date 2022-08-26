@@ -2,41 +2,41 @@
 
 ## Constructs <a name="Constructs" id="constructs"></a>
 
-### LambdaPowertoolsLayer <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer" id="cdklambdapowertoolspythonlayerlambdapowertoolslayer"></a>
+### LambdaPowertoolsLayer <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer" id="cdkawslambdapowertoolslayerlambdapowertoolslayer"></a>
 
 Defines a new Lambda Layer with Powertools for python library.
 
-#### Initializers <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.Initializer" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerinitializer"></a>
+#### Initializers <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.Initializer" id="cdkawslambdapowertoolslayerlambdapowertoolslayerinitializer"></a>
 
 ```typescript
-import { LambdaPowertoolsLayer } from 'cdk-lambda-powertools-python-layer'
+import { LambdaPowertoolsLayer } from 'cdk-aws-lambda-powertools-layer'
 
 new LambdaPowertoolsLayer(scope: Construct, id: string, props?: PowertoolsLayerProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`scope`](#cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterscope)<span title="Required">*</span> | [`constructs.Construct`](#constructs.Construct) | *No description.* |
-| [`id`](#cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterid)<span title="Required">*</span> | `string` | *No description.* |
-| [`props`](#cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterprops) | [`cdk-lambda-powertools-python-layer.PowertoolsLayerProps`](#cdk-lambda-powertools-python-layer.PowertoolsLayerProps) | *No description.* |
+| [`scope`](#cdkawslambdapowertoolslayerlambdapowertoolslayerparameterscope)<span title="Required">*</span> | [`constructs.Construct`](#constructs.Construct) | *No description.* |
+| [`id`](#cdkawslambdapowertoolslayerlambdapowertoolslayerparameterid)<span title="Required">*</span> | `string` | *No description.* |
+| [`props`](#cdkawslambdapowertoolslayerlambdapowertoolslayerparameterprops) | [`cdk-aws-lambda-powertools-layer.PowertoolsLayerProps`](#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps) | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.parameter.scope" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterscope"></a>
+##### `scope`<sup>Required</sup> <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.parameter.scope" id="cdkawslambdapowertoolslayerlambdapowertoolslayerparameterscope"></a>
 
 - *Type:* [`constructs.Construct`](#constructs.Construct)
 
 ---
 
-##### `id`<sup>Required</sup> <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.parameter.id" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterid"></a>
+##### `id`<sup>Required</sup> <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.parameter.id" id="cdkawslambdapowertoolslayerlambdapowertoolslayerparameterid"></a>
 
 - *Type:* `string`
 
 ---
 
-##### `props`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.parameter.props" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterprops"></a>
+##### `props`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.parameter.props" id="cdkawslambdapowertoolslayerlambdapowertoolslayerparameterprops"></a>
 
-- *Type:* [`cdk-lambda-powertools-python-layer.PowertoolsLayerProps`](#cdk-lambda-powertools-python-layer.PowertoolsLayerProps)
+- *Type:* [`cdk-aws-lambda-powertools-layer.PowertoolsLayerProps`](#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps)
 
 ---
 
@@ -45,31 +45,31 @@ new LambdaPowertoolsLayer(scope: Construct, id: string, props?: PowertoolsLayerP
 
 | **Name** | **Description** |
 | --- | --- |
-| [`constructBuildArgs`](#cdklambdapowertoolspythonlayerlambdapowertoolslayerconstructbuildargs) | creates build argument for the Dockerfile. |
+| [`constructBuildArgs`](#cdkawslambdapowertoolslayerlambdapowertoolslayerconstructbuildargs) | creates build argument for the Dockerfile. |
 
 ---
 
-##### `constructBuildArgs` <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.constructBuildArgs" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerconstructbuildargs"></a>
+##### `constructBuildArgs` <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.constructBuildArgs" id="cdkawslambdapowertoolslayerlambdapowertoolslayerconstructbuildargs"></a>
 
 ```typescript
-import { LambdaPowertoolsLayer } from 'cdk-lambda-powertools-python-layer'
+import { LambdaPowertoolsLayer } from 'cdk-aws-lambda-powertools-layer'
 
 LambdaPowertoolsLayer.constructBuildArgs(runtimeFamily: RuntimeFamily, includeExtras?: boolean, version?: string)
 ```
 
-###### `runtimeFamily`<sup>Required</sup> <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.parameter.runtimeFamily" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterruntimefamily"></a>
+###### `runtimeFamily`<sup>Required</sup> <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.parameter.runtimeFamily" id="cdkawslambdapowertoolslayerlambdapowertoolslayerparameterruntimefamily"></a>
 
 - *Type:* [`aws-cdk-lib.aws_lambda.RuntimeFamily`](#aws-cdk-lib.aws_lambda.RuntimeFamily)
 
 ---
 
-###### `includeExtras`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.parameter.includeExtras" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterincludeextras"></a>
+###### `includeExtras`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.parameter.includeExtras" id="cdkawslambdapowertoolslayerlambdapowertoolslayerparameterincludeextras"></a>
 
 - *Type:* `boolean`
 
 ---
 
-###### `version`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.LambdaPowertoolsLayer.parameter.version" id="cdklambdapowertoolspythonlayerlambdapowertoolslayerparameterversion"></a>
+###### `version`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.parameter.version" id="cdkawslambdapowertoolslayerlambdapowertoolslayerparameterversion"></a>
 
 - *Type:* `string`
 
@@ -79,14 +79,14 @@ LambdaPowertoolsLayer.constructBuildArgs(runtimeFamily: RuntimeFamily, includeEx
 
 ## Structs <a name="Structs" id="structs"></a>
 
-### PowertoolsLayerProps <a name="cdk-lambda-powertools-python-layer.PowertoolsLayerProps" id="cdklambdapowertoolspythonlayerpowertoolslayerprops"></a>
+### PowertoolsLayerProps <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps" id="cdkawslambdapowertoolslayerpowertoolslayerprops"></a>
 
 Properties for Powertools layer for python.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
 ```typescript
-import { PowertoolsLayerProps } from 'cdk-lambda-powertools-python-layer'
+import { PowertoolsLayerProps } from 'cdk-aws-lambda-powertools-layer'
 
 const powertoolsLayerProps: PowertoolsLayerProps = { ... }
 ```
@@ -95,14 +95,14 @@ const powertoolsLayerProps: PowertoolsLayerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`includeExtras`](#cdklambdapowertoolspythonlayerpowertoolslayerpropspropertyincludeextras) | `boolean` | A flag for the pydantic extras dependency, used for parsing. |
-| [`layerVersionName`](#cdklambdapowertoolspythonlayerpowertoolslayerpropspropertylayerversionname) | `string` | the name of the layer, will be randomised if empty. |
-| [`runtimeFamily`](#cdklambdapowertoolspythonlayerpowertoolslayerpropspropertyruntimefamily) | [`aws-cdk-lib.aws_lambda.RuntimeFamily`](#aws-cdk-lib.aws_lambda.RuntimeFamily) | the runtime of the layer. |
-| [`version`](#cdklambdapowertoolspythonlayerpowertoolslayerpropspropertyversion) | `string` | The powertools package version from pypi repository. |
+| [`includeExtras`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyincludeextras) | `boolean` | A flag for the pydantic extras dependency, used for parsing. |
+| [`layerVersionName`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertylayerversionname) | `string` | the name of the layer, will be randomised if empty. |
+| [`runtimeFamily`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyruntimefamily) | [`aws-cdk-lib.aws_lambda.RuntimeFamily`](#aws-cdk-lib.aws_lambda.RuntimeFamily) | the runtime of the layer. |
+| [`version`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyversion) | `string` | The powertools package version from pypi repository. |
 
 ---
 
-##### `includeExtras`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.PowertoolsLayerProps.property.includeExtras" id="cdklambdapowertoolspythonlayerpowertoolslayerpropspropertyincludeextras"></a>
+##### `includeExtras`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.includeExtras" id="cdkawslambdapowertoolslayerpowertoolslayerpropspropertyincludeextras"></a>
 
 ```typescript
 public readonly includeExtras: boolean;
@@ -116,7 +116,7 @@ This will increase the size of the layer significantly. If you don't use parsing
 
 ---
 
-##### `layerVersionName`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.PowertoolsLayerProps.property.layerVersionName" id="cdklambdapowertoolspythonlayerpowertoolslayerpropspropertylayerversionname"></a>
+##### `layerVersionName`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.layerVersionName" id="cdkawslambdapowertoolslayerpowertoolslayerpropspropertylayerversionname"></a>
 
 ```typescript
 public readonly layerVersionName: string;
@@ -128,7 +128,7 @@ the name of the layer, will be randomised if empty.
 
 ---
 
-##### `runtimeFamily`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.PowertoolsLayerProps.property.runtimeFamily" id="cdklambdapowertoolspythonlayerpowertoolslayerpropspropertyruntimefamily"></a>
+##### `runtimeFamily`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.runtimeFamily" id="cdkawslambdapowertoolslayerpowertoolslayerpropspropertyruntimefamily"></a>
 
 ```typescript
 public readonly runtimeFamily: RuntimeFamily;
@@ -140,7 +140,7 @@ the runtime of the layer.
 
 ---
 
-##### `version`<sup>Optional</sup> <a name="cdk-lambda-powertools-python-layer.PowertoolsLayerProps.property.version" id="cdklambdapowertoolspythonlayerpowertoolslayerpropspropertyversion"></a>
+##### `version`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.version" id="cdkawslambdapowertoolslayerpowertoolslayerpropspropertyversion"></a>
 
 ```typescript
 public readonly version: string;
