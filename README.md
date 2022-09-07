@@ -4,17 +4,21 @@
 
 This is a custom construct that will create AWS Lambda Layer with AWS Powertools for Python or NodeJS library. There are different
 ways how to create a layer and when working with CDK you need to install the library, create a zip file and wire it
-correctly. With this construct you don't have to care about packaging and dependency management, create a construct
+correctly. With this construct you don't have to care about packaging and dependency management. Create a construct
 and add it to your function. The construct is an extension of the
 existing [`LayerVersion`](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda.LayerVersion.html) construct
 from the CDK library, so you have access to all fields and methods.
 
+> ⚠️ **This construct uses docker to build and bundle the dependencies!**
+
 See the [API](API.md) for details.
 
 ```typescript
-import { LambdaPowertoolsLayer } from 'cdk-aws=lambda-powertools-python-layer';
+import {LambdaPowertoolsLayer} from 'cdk-aws-lambda-powertools-layer';
+import {RuntimeFamily } from "aws-cdk-lib/aws-lambda";
 
-const powertoolsLayer = new LambdaPowertoolsLayer(this, 'TestLayer');
+  const powertoolsLayerPython = new LambdaPowertoolsLayer(this, 'TestLayer', {runtimeFamily: RuntimeFamily.PYTHON});
+  const powertoolsLayerNodeJS = new LambdaPowertoolsLayer(this, 'TestLayer', {runtimeFamily: RuntimeFamily.NODEJS});
 ```
 
 Python
@@ -45,7 +49,7 @@ pip install cdk-aws-lambda-powertools-layer
 
 ### Python
 
-A single line will create a layer with powertools for python:
+A single line will create a layer with powertools for python. For NodeJS you need to specifically set the `runtimeFamily: Runtime.NODEJS` property.
 
 ```python
 from cdk_aws_lambda_powertools_layer import LambdaPowertoolsLayer
@@ -61,7 +65,6 @@ from aws_cdk import aws_lambda
 aws_lambda.Function(self, 'LambdaFunction',
                             code=aws_lambda.Code.from_asset('function'),
                             handler='app.handler',
-                            runtime=aws_lambda.Runtime.PYTHON_3_9,
                             layers=[powertoolsLayer])
 ```
 
@@ -99,7 +102,6 @@ class LayerTestStack(Stack):
         aws_lambda.Function(self, 'LambdaFunction',
                             code=aws_lambda.Code.from_asset('function'),
                             handler='app.handler',
-                            runtime=aws_lambda.Runtime.PYTHON_3_9,
                             layers=[powertoolsLayer])
 
 ```
@@ -127,7 +129,6 @@ export class CdkPowertoolsExampleStack extends Stack {
     new Function(this, 'LambdaFunction', {
       code: Code.fromAsset(path.join('./function')),
       handler: 'app.handler',
-      runtime: Runtime.PYTHON_3_9,
       layers: [powertoolsLayer],
     });
   }
