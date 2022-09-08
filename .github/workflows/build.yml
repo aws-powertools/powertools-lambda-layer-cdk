@@ -21,8 +21,6 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Install dependencies
         run: yarn install --check-files
-      - name: give user docker permission so we can run tests
-        run: sudo chown $(whoami) /var/run/docker.sock
       - name: build
         run: npx projen build
       - id: self_mutation
@@ -53,6 +51,7 @@ jobs:
           path: dist
     container:
       image: jsii/superchain:1-buster-slim-node14
+      options: --user root
   self-mutation:
     needs: build
     runs-on: ubuntu-latest
