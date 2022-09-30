@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { aws_lambda as lambda } from 'aws-cdk-lib';
+import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 
 /**
@@ -26,6 +27,11 @@ export interface PowertoolsLayerProps {
    * the runtime of the layer
    */
   readonly runtimeFamily?: lambda.RuntimeFamily;
+
+  /**
+   * The compatible architectures for the layer
+   */
+  readonly compatibleArchitectures?: lambda.Architecture[];
 }
 
 /**
@@ -70,6 +76,8 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
     const runtimeFamily = props?.runtimeFamily ?? lambda.RuntimeFamily.PYTHON;
     const languageName = getLanguageNameFromRuntimeFamily(runtimeFamily);
     const dockerFilePath = path.join(__dirname, `../layer/${languageName}`);
+    const compatibleArchitectures = props?.compatibleArchitectures ?? [lambda.Architecture.X86_64];
+
     console.log(`path ${dockerFilePath}`);
     super(scope, id, {
       code: lambda.Code.fromDockerBuild(dockerFilePath, {
@@ -80,10 +88,12 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
             props?.version,
           ),
         },
+        platform: getPlatformNameFromArchitectures(compatibleArchitectures),
       }),
       layerVersionName: props?.layerVersionName ? props?.layerVersionName : undefined,
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
+      compatibleArchitectures,
       description: `Lambda Powertools for ${languageName}${
         props?.includeExtras ? ' with Extras' : ''
       } ${props?.version ? `version ${props?.version}` : 'latest version'}`.trim(),
@@ -118,5 +128,16 @@ function getLanguageNameFromRuntimeFamily(runtimeFamily: lambda.RuntimeFamily): 
       return 'TypeScript';
     default:
       return 'Unknown';
+  }
+}
+
+function getPlatformNameFromArchitectures(architectures: lambda.Architecture[]): string {
+  if (architectures.length == 1) {
+    return architectures[0].dockerPlatform;
+  } else {
+    // if we have multiple architectures, we default to x86_64, hoping for the
+    // layer not to have any architecture specific code or at least contain
+    // binary code for all architectures
+    return Architecture.X86_64.dockerPlatform;
   }
 }

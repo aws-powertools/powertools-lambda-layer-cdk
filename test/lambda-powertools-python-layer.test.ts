@@ -1,6 +1,6 @@
 import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
 import { LambdaPowertoolsLayer } from '../src';
 
 
@@ -27,6 +27,21 @@ describe('with no configuration the construct', () => {
         'python3.8',
         'python3.9',
       ],
+    });
+  });
+});
+
+describe('with arm64 architecture', () => {
+  const stack = new Stack();
+  new LambdaPowertoolsLayer(stack, 'PowertoolsLayer', {
+    runtimeFamily: RuntimeFamily.PYTHON,
+    compatibleArchitectures: [Architecture.ARM_64],
+  });
+  const template = Template.fromStack(stack);
+  test('synthesizes successfully', () => {
+    template.hasResourceProperties('AWS::Lambda::LayerVersion', {
+      Description: 'Lambda Powertools for Python latest version',
+      CompatibleArchitectures: ['arm64'],
     });
   });
 });
