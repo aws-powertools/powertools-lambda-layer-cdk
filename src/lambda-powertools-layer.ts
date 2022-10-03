@@ -55,7 +55,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
     switch (runtimeFamily) {
       case lambda.RuntimeFamily.PYTHON:
         if (includeExtras) {
-          suffix = '[extras]';
+          suffix = '[all]';
         }
         if (version) {
           suffix = `${suffix}==${version}`;

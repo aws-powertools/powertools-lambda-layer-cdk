@@ -5,9 +5,9 @@ ARG PACKAGE_SUFFIX=''
 USER root
 WORKDIR /tmp
 
-# PACKAGE_SUFFIX = '[extras]==1.23.0'
-# PACKAGE_SUFFIX = '[extras]'
-# PACKAGE_SUFFIX = '=='1.23.0'
+# PACKAGE_SUFFIX = '[all]==2.0.0'
+# PACKAGE_SUFFIX = '[all]'
+# PACKAGE_SUFFIX = '=='2.0.0'
 # PACKAGE_SUFFIX = ''
 
 RUN yum update -y && yum install -y zip unzip wget tar gzip
