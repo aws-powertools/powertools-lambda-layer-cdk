@@ -108,13 +108,13 @@ describe('construct build args for Dockerfile', () => {
   test('returns extras and version', () => {
     const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, true, '1.21.0');
 
-    expect(args).toEqual('[extras]==1.21.0');
+    expect(args).toEqual('[all]==1.21.0');
   });
 
   test('returns only extras when no version provided', () => {
     const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, true, undefined);
 
-    expect(args).toEqual('[extras]');
+    expect(args).toEqual('[all]');
   });
 
   test('returns only version when no extras flag provided', () => {
