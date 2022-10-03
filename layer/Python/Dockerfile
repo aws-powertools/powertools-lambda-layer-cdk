@@ -16,10 +16,15 @@ RUN pip install -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
 
 # Removing nonessential files
 RUN cd /asset && \
+  # remove boto3 and botocore (already available in Lambda Runtime)
   rm -rf python/boto* && \
   # remove debugging symbols
   find python -name '*.so' -type f -exec strip "{}" \; && \
+  # remove tests
   find python -wholename "*/tests/*" -type f -delete && \
+  # remove python bytecode
   find python -regex '^.*\(__pycache__\|\.py[co]\)$' -delete && \
+  # zip layer
   zip -r9 aws-lambda-powertools.zip ./python && \
+  # delete original
   rm -rf ./python
