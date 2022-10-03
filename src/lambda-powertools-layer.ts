@@ -43,7 +43,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
    * There are multiple combinations between version and extras package that results in different suffix for the installation.
    * With and without version, with and without extras flag.
    * We construct one suffix here because it is easier to do in code than inside the Dockerfile with bash commands.
-   * For example, if we set extras=true and version=1.22.0 we get '[extras]==1.22.0'.
+   * For example, if we set `includeExtras=true` and `version=1.22.0` we get '[all]==1.22.0'.
    *
    */
   static constructBuildArgs(
@@ -88,7 +88,8 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
             props?.version,
           ),
         },
-        platform: getPlatformNameFromArchitectures(compatibleArchitectures),
+        // supports cross-platform docker build
+        platform: getDockerPlatformNameFromArchitectures(compatibleArchitectures),
       }),
       layerVersionName: props?.layerVersionName ? props?.layerVersionName : undefined,
       license: 'MIT-0',
@@ -131,7 +132,7 @@ function getLanguageNameFromRuntimeFamily(runtimeFamily: lambda.RuntimeFamily): 
   }
 }
 
-function getPlatformNameFromArchitectures(architectures: lambda.Architecture[]): string {
+function getDockerPlatformNameFromArchitectures(architectures: lambda.Architecture[]): string {
   if (architectures.length == 1) {
     return architectures[0].dockerPlatform;
   } else {
