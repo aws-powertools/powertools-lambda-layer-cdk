@@ -19,7 +19,7 @@ RUN cd /asset && \
   # remove boto3 and botocore (already available in Lambda Runtime)
   rm -rf python/boto* && \
   # remove boto3 dependencies
-  rm -rf python/s3transfer* python/*dateutil* python/urllib3* && \
+  rm -rf python/s3transfer* python/*dateutil* python/urllib3* python/six* && \
   # remove debugging symbols
   find python -name '*.so' -type f -exec strip "{}" \; && \
   # remove tests
