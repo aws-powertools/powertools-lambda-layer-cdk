@@ -18,6 +18,8 @@ RUN pip install -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
 RUN cd /asset && \
   # remove boto3 and botocore (already available in Lambda Runtime)
   rm -rf python/boto* && \
+  # remove boto3 dependencies
+  rm -rf python/s3transfer* python/*dateutil* python/urllib3* && \
   # remove debugging symbols
   find python -name '*.so' -type f -exec strip "{}" \; && \
   # remove tests

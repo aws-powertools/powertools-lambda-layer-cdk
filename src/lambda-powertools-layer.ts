@@ -77,6 +77,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
     const languageName = getLanguageNameFromRuntimeFamily(runtimeFamily);
     const dockerFilePath = path.join(__dirname, `../layer/${languageName}`);
     const compatibleArchitectures = props?.compatibleArchitectures ?? [lambda.Architecture.X86_64];
+    const compatibleArchitecturesDescription = compatibleArchitectures.map((arch) => arch.name).join(', ');
 
     console.log(`path ${dockerFilePath}`);
     super(scope, id, {
@@ -95,7 +96,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
       compatibleArchitectures,
-      description: `Lambda Powertools for ${languageName} [${compatibleArchitectures.map(x => x.name).join(', ')}]${
+      description: `Lambda Powertools for ${languageName} [${compatibleArchitecturesDescription}]${
         props?.includeExtras ? ' with extra dependencies' : ''
       } ${props?.version ? `version ${props?.version}` : 'latest version'}`.trim(),
     });
