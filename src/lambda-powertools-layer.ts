@@ -95,8 +95,8 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
       compatibleArchitectures,
-      description: `Lambda Powertools for ${languageName}${
-        props?.includeExtras ? ' with Extras' : ''
+      description: `Lambda Powertools for ${languageName} [${compatibleArchitectures.map(x => x.name).join(', ')}]${
+        props?.includeExtras ? ' with extra dependencies' : ''
       } ${props?.version ? `version ${props?.version}` : 'latest version'}`.trim(),
     });
   }

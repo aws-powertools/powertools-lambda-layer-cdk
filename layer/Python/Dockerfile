@@ -10,7 +10,7 @@ WORKDIR /tmp
 # PACKAGE_SUFFIX = '=='2.0.0'
 # PACKAGE_SUFFIX = ''
 
-RUN yum update -y && yum install -y zip unzip wget tar gzip
+RUN yum update -y && yum install -y zip unzip wget tar gzip binutils
 
 RUN pip install -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
 
@@ -23,8 +23,4 @@ RUN cd /asset && \
   # remove tests
   find python -wholename "*/tests/*" -type f -delete && \
   # remove python bytecode
-  find python -regex '^.*\(__pycache__\|\.py[co]\)$' -delete && \
-  # zip layer
-  zip -r9 aws-lambda-powertools.zip ./python && \
-  # delete original
-  rm -rf ./python
+  find python -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
