@@ -17,6 +17,7 @@ RUN pip install -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
 # Removing nonessential files
 RUN cd /asset && \
   rm -rf python/boto* && \
+  # remove debugging symbols
   find python -name '*.so' -type f -exec strip "{}" \; && \
   find python -wholename "*/tests/*" -type f -delete && \
   find python -regex '^.*\(__pycache__\|\.py[co]\)$' -delete && \
