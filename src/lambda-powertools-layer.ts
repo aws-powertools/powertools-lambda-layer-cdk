@@ -132,6 +132,8 @@ function getLanguageNameFromRuntimeFamily(runtimeFamily: lambda.RuntimeFamily): 
   }
 }
 
+// Docker expects a single string for the --platform option.
+// getDockerPlatformNameFromArchitectures converts the Architecture enum to a string.
 function getDockerPlatformNameFromArchitectures(architectures: lambda.Architecture[]): string {
   if (architectures.length == 1) {
     return architectures[0].dockerPlatform;
