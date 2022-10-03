@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { aws_lambda as lambda } from 'aws-cdk-lib';
+import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 
 /**
@@ -10,8 +11,9 @@ export interface PowertoolsLayerProps {
    * The powertools package version from pypi repository.
    */
   readonly version?: string;
+
   /**
-   * A flag for the pydantic extras dependency, used for parsing.
+   * A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.)
    * This will increase the size of the layer significantly. If you don't use parsing, ignore it.
    */
   readonly includeExtras?: boolean;
@@ -25,6 +27,11 @@ export interface PowertoolsLayerProps {
    * the runtime of the layer
    */
   readonly runtimeFamily?: lambda.RuntimeFamily;
+
+  /**
+   * The compatible architectures for the layer
+   */
+  readonly compatibleArchitectures?: lambda.Architecture[];
 }
 
 /**
@@ -36,7 +43,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
    * There are multiple combinations between version and extras package that results in different suffix for the installation.
    * With and without version, with and without extras flag.
    * We construct one suffix here because it is easier to do in code than inside the Dockerfile with bash commands.
-   * For example, if we set extras=true and version=1.22.0 we get '[pydantic]==1.22.0'.
+   * For example, if we set `includeExtras=true` and `version=1.22.0` we get '[all]==1.22.0'.
    *
    */
   static constructBuildArgs(
@@ -48,7 +55,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
     switch (runtimeFamily) {
       case lambda.RuntimeFamily.PYTHON:
         if (includeExtras) {
-          suffix = '[pydantic]';
+          suffix = '[all]';
         }
         if (version) {
           suffix = `${suffix}==${version}`;
@@ -69,6 +76,9 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
     const runtimeFamily = props?.runtimeFamily ?? lambda.RuntimeFamily.PYTHON;
     const languageName = getLanguageNameFromRuntimeFamily(runtimeFamily);
     const dockerFilePath = path.join(__dirname, `../layer/${languageName}`);
+    const compatibleArchitectures = props?.compatibleArchitectures ?? [lambda.Architecture.X86_64];
+    const compatibleArchitecturesDescription = compatibleArchitectures.map((arch) => arch.name).join(', ');
+
     console.log(`path ${dockerFilePath}`);
     super(scope, id, {
       code: lambda.Code.fromDockerBuild(dockerFilePath, {
@@ -79,12 +89,15 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
             props?.version,
           ),
         },
+        // supports cross-platform docker build
+        platform: getDockerPlatformNameFromArchitectures(compatibleArchitectures),
       }),
       layerVersionName: props?.layerVersionName ? props?.layerVersionName : undefined,
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
-      description: `Lambda Powertools for ${languageName}${
-        props?.includeExtras ? ' with Pydantic' : ''
+      compatibleArchitectures,
+      description: `Lambda Powertools for ${languageName} [${compatibleArchitecturesDescription}]${
+        props?.includeExtras ? ' with extra dependencies' : ''
       } ${props?.version ? `version ${props?.version}` : 'latest version'}`.trim(),
     });
   }
@@ -94,7 +107,6 @@ function getRuntimesFromRuntimeFamily(runtimeFamily: lambda.RuntimeFamily): lamb
   switch (runtimeFamily) {
     case lambda.RuntimeFamily.PYTHON:
       return [
-        lambda.Runtime.PYTHON_3_6,
         lambda.Runtime.PYTHON_3_7,
         lambda.Runtime.PYTHON_3_8,
         lambda.Runtime.PYTHON_3_9,
@@ -118,5 +130,18 @@ function getLanguageNameFromRuntimeFamily(runtimeFamily: lambda.RuntimeFamily): 
       return 'TypeScript';
     default:
       return 'Unknown';
+  }
+}
+
+// Docker expects a single string for the --platform option.
+// getDockerPlatformNameFromArchitectures converts the Architecture enum to a string.
+function getDockerPlatformNameFromArchitectures(architectures: lambda.Architecture[]): string {
+  if (architectures.length == 1) {
+    return architectures[0].dockerPlatform;
+  } else {
+    // if we have multiple architectures, we default to x86_64, hoping for the
+    // layer not to have any architecture specific code or at least contain
+    // binary code for all architectures
+    return Architecture.X86_64.dockerPlatform;
   }
 }

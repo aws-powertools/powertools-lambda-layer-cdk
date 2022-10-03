@@ -1,6 +1,6 @@
 import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
 import { LambdaPowertoolsLayer } from '../src';
 
 
@@ -10,7 +10,7 @@ describe('with no configuration the construct', () => {
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python latest version',
+      Description: 'Lambda Powertools for Python [x86_64] latest version',
     });
   });
 
@@ -23,11 +23,25 @@ describe('with no configuration the construct', () => {
   test('matches the python 3.x runtimes', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
       CompatibleRuntimes: [
-        'python3.6',
         'python3.7',
         'python3.8',
         'python3.9',
       ],
+    });
+  });
+});
+
+describe('with arm64 architecture', () => {
+  const stack = new Stack();
+  new LambdaPowertoolsLayer(stack, 'PowertoolsLayer', {
+    runtimeFamily: RuntimeFamily.PYTHON,
+    compatibleArchitectures: [Architecture.ARM_64],
+  });
+  const template = Template.fromStack(stack);
+  test('synthesizes successfully', () => {
+    template.hasResourceProperties('AWS::Lambda::LayerVersion', {
+      Description: 'Lambda Powertools for Python [arm64] latest version',
+      CompatibleArchitectures: ['arm64'],
     });
   });
 });
@@ -54,7 +68,7 @@ describe('with version configuration the construct', () => {
 
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python version 1.21.0',
+      Description: 'Lambda Powertools for Python [x86_64] version 1.21.0',
     });
   });
 
@@ -73,34 +87,34 @@ describe('with version configuration the construct', () => {
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python with Pydantic version 1.22.0',
+      Description: 'Lambda Powertools for Python [x86_64] with extra dependencies version 1.22.0',
     });
 
   });
 
-  test('synthesizes with pyndatic and latest version', () => {
+  test('synthesizes with extras and latest version', () => {
     const stack = new Stack();
     new LambdaPowertoolsLayer(stack, 'LayerExtrasNoVersion', {
       includeExtras: true,
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python with Pydantic latest version',
+      Description: 'Lambda Powertools for Python [x86_64] with extra dependencies latest version',
     });
   });
 });
 
 describe('construct build args for Dockerfile', () => {
-  test('returns pydantic and version', () => {
+  test('returns extras and version', () => {
     const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, true, '1.21.0');
 
-    expect(args).toEqual('[pydantic]==1.21.0');
+    expect(args).toEqual('[all]==1.21.0');
   });
 
-  test('returns only pydantic when no version provided', () => {
+  test('returns only extras when no version provided', () => {
     const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, true, undefined);
 
-    expect(args).toEqual('[pydantic]');
+    expect(args).toEqual('[all]');
   });
 
   test('returns only version when no extras flag provided', () => {

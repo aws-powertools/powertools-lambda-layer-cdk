@@ -95,10 +95,23 @@ const powertoolsLayerProps: PowertoolsLayerProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| [`includeExtras`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyincludeextras) | `boolean` | A flag for the pydantic extras dependency, used for parsing. |
+| [`compatibleArchitectures`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertycompatiblearchitectures) | [`aws-cdk-lib.aws_lambda.Architecture`](#aws-cdk-lib.aws_lambda.Architecture)[] | The compatible architectures for the layer. |
+| [`includeExtras`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyincludeextras) | `boolean` | A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it. |
 | [`layerVersionName`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertylayerversionname) | `string` | the name of the layer, will be randomised if empty. |
 | [`runtimeFamily`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyruntimefamily) | [`aws-cdk-lib.aws_lambda.RuntimeFamily`](#aws-cdk-lib.aws_lambda.RuntimeFamily) | the runtime of the layer. |
 | [`version`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyversion) | `string` | The powertools package version from pypi repository. |
+
+---
+
+##### `compatibleArchitectures`<sup>Optional</sup> <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.compatibleArchitectures" id="cdkawslambdapowertoolslayerpowertoolslayerpropspropertycompatiblearchitectures"></a>
+
+```typescript
+public readonly compatibleArchitectures: Architecture[];
+```
+
+- *Type:* [`aws-cdk-lib.aws_lambda.Architecture`](#aws-cdk-lib.aws_lambda.Architecture)[]
+
+The compatible architectures for the layer.
 
 ---
 
@@ -110,9 +123,7 @@ public readonly includeExtras: boolean;
 
 - *Type:* `boolean`
 
-A flag for the pydantic extras dependency, used for parsing.
-
-This will increase the size of the layer significantly. If you don't use parsing, ignore it.
+A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it.
 
 ---
 
