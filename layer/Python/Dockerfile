@@ -12,7 +12,24 @@ WORKDIR /tmp
 
 RUN yum update -y && yum install -y zip unzip wget tar gzip binutils
 
-RUN pip install -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
+# Install build essentials
+RUN yum install -y \
+  boost-devel \
+  jemalloc-devel \
+  bison \
+  make \
+  gcc \
+  gcc-c++ \
+  flex \
+  autoconf \
+  zip \
+  git \
+  ninja-build
+
+# Install cython to generate native code
+RUN pip install --upgrade pip wheel && pip install --upgrade cython
+# Optimize binary size and strip debugging symbols for optimum size
+RUN CFLAGS="-Os -g0 -s" pip install --no-binary pydantic -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
 
 # Removing nonessential files
 RUN cd /asset && \
