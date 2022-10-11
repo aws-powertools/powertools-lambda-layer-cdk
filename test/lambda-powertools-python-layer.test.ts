@@ -117,6 +117,13 @@ describe('construct build args for Dockerfile', () => {
     expect(args).toEqual('[all]');
   });
 
+  test('returns a git url with extras when a git url is provided', () => {
+    const version = 'git+https://github.com/awslabs/aws-lambda-powertools-python@v2';
+    const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, true, version);
+
+    expect(args).toEqual(`[all] @ ${version}`);
+  });
+
   test('returns only version when no extras flag provided', () => {
     const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, undefined, '1.11.0');
 
@@ -127,6 +134,13 @@ describe('construct build args for Dockerfile', () => {
     const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, undefined, undefined);
 
     expect(args).toEqual('');
+  });
+
+  test('returns a git url when a git url is provided and extras provided', () => {
+    const version = 'git+https://github.com/awslabs/aws-lambda-powertools-python@v2';
+    const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.PYTHON, false, version);
+
+    expect(args).toEqual(` @ ${version}`);
   });
 
 });
