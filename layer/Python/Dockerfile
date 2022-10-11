@@ -6,8 +6,10 @@ USER root
 WORKDIR /tmp
 
 # PACKAGE_SUFFIX = '[all]==2.0.0'
+# PACKAGE_SUFFIX = '[all] @ git+https://github.com/awslabs/aws-lambda-powertools-python@v2'
 # PACKAGE_SUFFIX = '[all]'
 # PACKAGE_SUFFIX = '=='2.0.0'
+# PACKAGE_SUFFIX = ' @ git+https://github.com/awslabs/aws-lambda-powertools-python@v2'
 # PACKAGE_SUFFIX = ''
 
 RUN yum update -y && yum install -y zip unzip wget tar gzip binutils
@@ -29,7 +31,7 @@ RUN yum install -y \
 # Install cython to generate native code
 RUN pip install --upgrade pip wheel && pip install --upgrade cython
 # Optimize binary size and strip debugging symbols for optimum size
-RUN CFLAGS="-Os -g0 -s" pip install --no-binary pydantic -t /asset/python aws-lambda-powertools$PACKAGE_SUFFIX
+RUN CFLAGS="-Os -g0 -s" pip install --no-binary pydantic -t /asset/python "aws-lambda-powertools$PACKAGE_SUFFIX"
 
 # Removing nonessential files
 RUN cd /asset && \

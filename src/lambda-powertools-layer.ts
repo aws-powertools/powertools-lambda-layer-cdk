@@ -58,7 +58,11 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
           suffix = '[all]';
         }
         if (version) {
-          suffix = `${suffix}==${version}`;
+          if (version.startsWith('git')) {
+            suffix = `${suffix} @ ${version}`;
+          } else {
+            suffix = `${suffix}==${version}`;
+          }
         }
         break;
       case lambda.RuntimeFamily.NODEJS:
