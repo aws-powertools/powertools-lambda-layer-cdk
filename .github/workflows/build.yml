@@ -29,7 +29,7 @@ jobs:
           git diff --staged --patch --exit-code > .repo.patch || echo "::set-output name=self_mutation_happened::true"
       - if: steps.self_mutation.outputs.self_mutation_happened
         name: Upload patch
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: .repo.patch
           path: .repo.patch
@@ -48,7 +48,7 @@ jobs:
           name: build-artifact
           path: dist
     container:
-      image: jsii/superchain:1-buster-slim-node14
+      image: jsii/superchain:1-buster-slim-node16
       options: --user root
   self-mutation:
     needs: build
@@ -65,7 +65,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: Download patch
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: .repo.patch
           path: ${{ runner.temp }}
@@ -91,7 +91,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: dist
@@ -116,7 +116,7 @@ jobs:
         with:
           python-version: 3.x
       - name: Download build artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: build-artifact
           path: dist
