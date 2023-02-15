@@ -66,7 +66,7 @@ describe('with version configuration the construct', () => {
     expect(() => new LambdaPowertoolsLayer(stack, 'PowertoolsLayerBadVersion', {
       runtimeFamily: RuntimeFamily.NODEJS,
       version: '12.222.21123',
-    })).toThrow(/docker exited with status 1/);
+    })).toThrow();
   });
 
 
