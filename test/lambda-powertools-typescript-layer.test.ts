@@ -28,6 +28,7 @@ describe('with minimal configuration the construct', () => {
         'nodejs12.x',
         'nodejs14.x',
         'nodejs16.x',
+        'nodejs18.x',
       ],
     });
   });
