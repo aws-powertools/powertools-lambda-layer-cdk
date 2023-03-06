@@ -17,8 +17,8 @@ jobs:
           fetch-depth: 0
       - name: Set git identity
         run: |-
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config --global --add user.name "github-actions"
+          git config --global --add user.email "github-actions@github.com"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@e81a89b1732b9c48d79cd809d8d81d79c4647a18 # v2.0.0
         with:
