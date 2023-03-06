@@ -4,7 +4,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorUrl: 'https://aws.amazon.com',
   authorOrganization: true,
   keywords: ['aws', 'cdk', 'powertools', 'python', 'layer', 'lambda', 'devax', 'typescript', 'nodejs'],
-  cdkVersion: '2.44.0',
+  cdkVersion: '2.51.1',
   defaultReleaseBranch: 'main',
   majorVersion: 3,
   name: 'cdk-aws-lambda-powertools-layer',
