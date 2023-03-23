@@ -41,9 +41,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --check-files
       - name: build
-        run:
-        - id
-        - npx projen build
+        run: |
+          USER_ID=$(id -u)
+          GROUP_ID=$(id -g)
+          echo "User ID: $USER_ID"
+          echo "Group ID: $GROUP_ID"
+          npx projen build
       - id: self_mutation
         name: Find mutations
         run: >-
