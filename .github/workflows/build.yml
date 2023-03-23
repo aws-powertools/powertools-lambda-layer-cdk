@@ -42,13 +42,8 @@ jobs:
         run: yarn install --check-files
       - name: build
         run: |
-          USER_ID=$(id -u)
-          GROUP_ID=$(id -g)
-          whoami
-          echo "User ID: $USER_ID"
-          echo "Group ID: $GROUP_ID"
-          ls -la
-          npm run build
+          npm config set user 0
+          npx projen build
       - id: self_mutation
         name: Find mutations
         run: >-
