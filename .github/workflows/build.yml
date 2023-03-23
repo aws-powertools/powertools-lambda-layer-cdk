@@ -43,6 +43,7 @@ jobs:
       - name: build
         run: |
           npm config set user 0
+          npm config set unsafe-perm true
           npx projen build
       - id: self_mutation
         name: Find mutations
