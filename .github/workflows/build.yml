@@ -46,6 +46,7 @@ jobs:
           GROUP_ID=$(id -g)
           echo "User ID: $USER_ID"
           echo "Group ID: $GROUP_ID"
+          ls -la
           npx projen build
       - id: self_mutation
         name: Find mutations
