@@ -42,8 +42,7 @@ jobs:
         run: yarn install --check-files
       - name: build
         run: |
-          npm config set user 0
-          npm config set unsafe-perm true
+          chown -R $(whoami) $(pwd)
           npx projen build
       - id: self_mutation
         name: Find mutations
