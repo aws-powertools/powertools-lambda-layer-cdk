@@ -22,7 +22,7 @@ jobs:
         run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Set up QEMU
         uses: docker/setup-qemu-action@e81a89b1732b9c48d79cd809d8d81d79c4647a18 # v2.0.0
         with:
@@ -109,7 +109,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -131,7 +131,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16.x
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
