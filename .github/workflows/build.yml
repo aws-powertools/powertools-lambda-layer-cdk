@@ -42,6 +42,7 @@ jobs:
         run: yarn install --check-files
       - name: build
         run: |
+          ls -la
           chown -R $(whoami) $(pwd)/package.json
           npx projen build
       - id: self_mutation
