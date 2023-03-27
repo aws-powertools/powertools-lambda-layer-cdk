@@ -5,10 +5,10 @@ on:
       - main
   pull_request: {}
   workflow_dispatch: {}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
     outputs:
@@ -41,7 +41,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --check-files
       - name: build
-        run: npx projen build
+        run: |
+          chown -R $(whoami) $(pwd)
+          npx projen build
       - id: self_mutation
         name: Find mutations
         run: >-
