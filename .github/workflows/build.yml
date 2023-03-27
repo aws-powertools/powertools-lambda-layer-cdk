@@ -43,7 +43,7 @@ jobs:
       - name: build
         run: |
           ls -la
-          chown -R $(whoami) $(pwd)/package.json
+          chown -R $(whoami) $(pwd)
           npx projen build
       - id: self_mutation
         name: Find mutations
