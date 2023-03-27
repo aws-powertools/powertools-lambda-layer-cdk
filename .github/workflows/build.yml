@@ -42,7 +42,7 @@ jobs:
         run: yarn install --check-files
       - name: build
         run: |
-          chown -R $(whoami)/package.json $(pwd)
+          chown -R $(whoami) $(pwd)/package.json
           npx projen build
       - id: self_mutation
         name: Find mutations
