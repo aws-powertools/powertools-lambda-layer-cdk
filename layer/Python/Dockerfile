@@ -31,7 +31,7 @@ RUN yum install -y \
 # Install cython to generate native code
 RUN pip install --upgrade pip wheel && pip install --upgrade cython
 # Optimize binary size and strip debugging symbols for optimum size
-RUN CFLAGS="-Os -g0 -s" pip install --no-binary pydantic -t /asset/python "aws-lambda-powertools$PACKAGE_SUFFIX"
+RUN CFLAGS="-Os -g0 -s" pip install --no-binary pydantic==1.* -t /asset/python "aws-lambda-powertools$PACKAGE_SUFFIX"
 
 # Removing nonessential files
 RUN cd /asset && \
