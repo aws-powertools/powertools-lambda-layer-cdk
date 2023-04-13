@@ -99,10 +99,13 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
       layerVersionName: props?.layerVersionName ? props?.layerVersionName : undefined,
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
-      compatibleArchitectures,
       description: `Lambda Powertools for ${languageName} [${compatibleArchitecturesDescription}]${
         props?.includeExtras ? ' with extra dependencies' : ''
       } ${props?.version ? `version ${props?.version}` : 'latest version'}`.trim(),
+      // Dear reader: I'm happy that you've stumbled upon this line too! You might wonder, why are we doing this and passing `undefined` when the list is empty?
+      // Answer: on regions that don't support ARM64 Lambdas, we can't use the `compatibleArchitectures` parameter. Otherwise CloudFormation will bail with an error.
+      // So if this construct is called with en empty list of architectures, just pass undefined down to the CDK construct.
+      compatibleArchitectures: compatibleArchitectures.length == 0 ? undefined : compatibleArchitectures,
     });
   }
 }
