@@ -117,6 +117,7 @@ function getRuntimesFromRuntimeFamily(runtimeFamily: lambda.RuntimeFamily): lamb
         lambda.Runtime.PYTHON_3_7,
         lambda.Runtime.PYTHON_3_8,
         lambda.Runtime.PYTHON_3_9,
+        lambda.Runtime.PYTHON_3_10,
       ];
     case lambda.RuntimeFamily.NODEJS:
       return [
