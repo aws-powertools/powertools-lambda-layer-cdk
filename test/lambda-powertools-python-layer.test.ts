@@ -100,7 +100,7 @@ describe('with version configuration the construct', () => {
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python [x86_64] with extra dependencies latest version',
+      Description: 'Powertools for AWS Lambda (Python) [x86_64] with extra dependencies latest version',
     });
   });
 });

@@ -4,7 +4,7 @@
 
 ### LambdaPowertoolsLayer <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer" id="cdkawslambdapowertoolslayerlambdapowertoolslayer"></a>
 
-Defines a new Lambda Layer with Powertools for python library.
+Defines a new Lambda Layer containing Powertools for AWS Lambda.
 
 #### Initializers <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.Initializer" id="cdkawslambdapowertoolslayerlambdapowertoolslayerinitializer"></a>
 
@@ -81,7 +81,7 @@ LambdaPowertoolsLayer.constructBuildArgs(runtimeFamily: RuntimeFamily, includeEx
 
 ### PowertoolsLayerProps <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps" id="cdkawslambdapowertoolslayerpowertoolslayerprops"></a>
 
-Properties for Powertools layer for python.
+Properties for the layer.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
@@ -159,7 +159,7 @@ public readonly version: string;
 
 - *Type:* `string`
 
-The powertools package version from pypi repository.
+The package version from pypi repository.
 
 ---
 

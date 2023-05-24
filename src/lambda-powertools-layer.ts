@@ -4,11 +4,11 @@ import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 
 /**
- * Properties for Powertools layer for python.
+ * Properties for Powertools for AWS Lambda (Python) Layer.
  */
 export interface PowertoolsLayerProps {
   /**
-   * The powertools package version from pypi repository.
+   * The Powertools for AWS Lambda package version from pypi repository.
    */
   readonly version?: string;
 
@@ -35,7 +35,7 @@ export interface PowertoolsLayerProps {
 }
 
 /**
- * Defines a new Lambda Layer with Powertools for python library.
+ * Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
  */
 export class LambdaPowertoolsLayer extends lambda.LayerVersion {
   /**
