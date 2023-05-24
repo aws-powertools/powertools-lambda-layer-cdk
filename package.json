@@ -1,6 +1,6 @@
 {
   "name": "cdk-aws-lambda-powertools-layer",
-  "description": "Creates Powertools for AWS Lambda layers with python and typescript",
+  "description": "Powertools for AWS Lambda layer for python and typescript",
   "repository": {
     "type": "git",
     "url": "https://github.com/awslabs/cdk-aws-lambda-powertools-layer.git"
