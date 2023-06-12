@@ -1,8 +1,8 @@
-# AWS Lambda powertools layer
+# Powertools for AWS Lambda Layer
 
 ## Why this project exists
 
-This is a custom construct that will create AWS Lambda Layer with AWS Powertools for Python or NodeJS library. There are different
+This is a custom construct that will create AWS Lambda Layer with Powertools for AWS Lambda for Python or NodeJS library. There are different
 ways how to create a layer and when working with CDK you need to install the library, create a zip file and wire it
 correctly. With this construct you don't have to care about packaging and dependency management. Create a construct
 and add it to your function. The construct is an extension of the
@@ -49,7 +49,7 @@ pip install cdk-aws-lambda-powertools-layer
 
 ### Python
 
-A single line will create a layer with powertools for python. For NodeJS you need to specifically set the `runtimeFamily: Runtime.NODEJS` property.
+A single line will create a layer with Powertools for AWS Lambda (Python). For NodeJS you need to specifically set the `runtimeFamily: Runtime.NODEJS` property.
 
 ```python
 from cdk_aws_lambda_powertools_layer import LambdaPowertoolsLayer

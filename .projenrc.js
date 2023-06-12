@@ -10,7 +10,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   majorVersion: 3,
   name: 'cdk-aws-lambda-powertools-layer',
   repositoryUrl: 'https://github.com/awslabs/cdk-aws-lambda-powertools-layer.git',
-  description: 'A lambda layer for AWS Powertools for python and typescript',
+  description: 'Powertools for AWS Lambda layer for python and typescript',
   devDeps: [
     '@types/prettier@2.6.0', // pin until breaking changes is resolved: https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/60310
   ],

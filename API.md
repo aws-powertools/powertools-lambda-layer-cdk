@@ -4,7 +4,7 @@
 
 ### LambdaPowertoolsLayer <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer" id="cdkawslambdapowertoolslayerlambdapowertoolslayer"></a>
 
-Defines a new Lambda Layer with Powertools for python library.
+Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
 
 #### Initializers <a name="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.Initializer" id="cdkawslambdapowertoolslayerlambdapowertoolslayerinitializer"></a>
 
@@ -81,7 +81,7 @@ LambdaPowertoolsLayer.constructBuildArgs(runtimeFamily: RuntimeFamily, includeEx
 
 ### PowertoolsLayerProps <a name="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps" id="cdkawslambdapowertoolslayerpowertoolslayerprops"></a>
 
-Properties for Powertools layer for python.
+Properties for Powertools for AWS Lambda (Python) Layer.
 
 #### Initializer <a name="[object Object].Initializer" id="object-objectinitializer"></a>
 
@@ -99,7 +99,7 @@ const powertoolsLayerProps: PowertoolsLayerProps = { ... }
 | [`includeExtras`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyincludeextras) | `boolean` | A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it. |
 | [`layerVersionName`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertylayerversionname) | `string` | the name of the layer, will be randomised if empty. |
 | [`runtimeFamily`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyruntimefamily) | [`aws-cdk-lib.aws_lambda.RuntimeFamily`](#aws-cdk-lib.aws_lambda.RuntimeFamily) | the runtime of the layer. |
-| [`version`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyversion) | `string` | The powertools package version from pypi repository. |
+| [`version`](#cdkawslambdapowertoolslayerpowertoolslayerpropspropertyversion) | `string` | The Powertools for AWS Lambda package version from pypi repository. |
 
 ---
 
@@ -159,7 +159,7 @@ public readonly version: string;
 
 - *Type:* `string`
 
-The powertools package version from pypi repository.
+The Powertools for AWS Lambda package version from pypi repository.
 
 ---
 

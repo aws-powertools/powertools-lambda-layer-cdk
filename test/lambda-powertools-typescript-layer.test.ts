@@ -12,7 +12,7 @@ describe('with minimal configuration the construct', () => {
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for TypeScript [x86_64] latest version',
+      Description: 'Powertools for AWS Lambda (TypeScript) [x86_64] latest version',
     });
   });
 
@@ -58,7 +58,7 @@ describe('with version configuration the construct', () => {
 
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: `Lambda Powertools for TypeScript [x86_64] version ${version}`,
+      Description: `Powertools for AWS Lambda (TypeScript) [x86_64] version ${version}`,
     });
   });
 

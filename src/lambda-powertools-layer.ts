@@ -4,11 +4,11 @@ import { Architecture } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 
 /**
- * Properties for Powertools layer for python.
+ * Properties for Powertools for AWS Lambda (Python) Layer.
  */
 export interface PowertoolsLayerProps {
   /**
-   * The powertools package version from pypi repository.
+   * The Powertools for AWS Lambda package version from pypi repository.
    */
   readonly version?: string;
 
@@ -35,7 +35,7 @@ export interface PowertoolsLayerProps {
 }
 
 /**
- * Defines a new Lambda Layer with Powertools for python library.
+ * Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
  */
 export class LambdaPowertoolsLayer extends lambda.LayerVersion {
   /**
@@ -99,7 +99,7 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
       layerVersionName: props?.layerVersionName ? props?.layerVersionName : undefined,
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
-      description: `Lambda Powertools for ${languageName} [${compatibleArchitecturesDescription}]${
+      description: `Powertools for AWS Lambda (${languageName}) [${compatibleArchitecturesDescription}]${
         props?.includeExtras ? ' with extra dependencies' : ''
       } ${props?.version ? `version ${props?.version}` : 'latest version'}`.trim(),
       // Dear reader: I'm happy that you've stumbled upon this line too! You might wonder, why are we doing this and passing `undefined` when the list is empty?

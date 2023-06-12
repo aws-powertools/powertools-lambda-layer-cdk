@@ -10,7 +10,7 @@ describe('with no configuration the construct', () => {
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python [x86_64] latest version',
+      Description: 'Powertools for AWS Lambda (Python) [x86_64] latest version',
     });
   });
 
@@ -41,7 +41,7 @@ describe('with arm64 architecture', () => {
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python [arm64] latest version',
+      Description: 'Powertools for AWS Lambda (Python) [arm64] latest version',
       CompatibleArchitectures: ['arm64'],
     });
   });
@@ -69,7 +69,7 @@ describe('with version configuration the construct', () => {
 
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python [x86_64] version 1.21.0',
+      Description: 'Powertools for AWS Lambda (Python) [x86_64] version 1.21.0',
     });
   });
 
@@ -88,7 +88,7 @@ describe('with version configuration the construct', () => {
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python [x86_64] with extra dependencies version 1.22.0',
+      Description: 'Powertools for AWS Lambda (Python) [x86_64] with extra dependencies version 1.22.0',
     });
 
   });
@@ -100,7 +100,7 @@ describe('with version configuration the construct', () => {
     });
 
     Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Lambda Powertools for Python [x86_64] with extra dependencies latest version',
+      Description: 'Powertools for AWS Lambda (Python) [x86_64] with extra dependencies latest version',
     });
   });
 });
