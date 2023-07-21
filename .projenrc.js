@@ -14,7 +14,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'typescript',
     'nodejs',
   ],
-  cdkVersion: '2.80.0',
+  cdkVersion: '2.88.0',
   defaultReleaseBranch: 'main',
   minNodeVersion: '16.19.1',
   majorVersion: 3,
