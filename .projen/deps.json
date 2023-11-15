@@ -17,12 +17,22 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^6",
+      "version": "^5",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^6",
+      "version": "^5",
+      "type": "build"
+    },
+    {
+      "name": "aws-cdk-lib",
+      "version": "2.108.1",
+      "type": "build"
+    },
+    {
+      "name": "constructs",
+      "version": "10.0.5",
       "type": "build"
     },
     {
@@ -109,7 +119,7 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.88.0",
+      "version": "^2.108.1",
       "type": "peer"
     },
     {
