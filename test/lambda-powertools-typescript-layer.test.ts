@@ -3,7 +3,6 @@ import { Template } from 'aws-cdk-lib/assertions';
 import { RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
 import { LambdaPowertoolsLayer } from '../src';
 
-
 describe('with minimal configuration the construct', () => {
   const stack = new Stack();
   new LambdaPowertoolsLayer(stack, 'PowertoolsLayer', {
@@ -12,7 +11,8 @@ describe('with minimal configuration the construct', () => {
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Powertools for AWS Lambda (TypeScript) [x86_64] latest version',
+      Description:
+        'Powertools for AWS Lambda (TypeScript) [x86_64] latest version',
     });
   });
 
@@ -29,6 +29,7 @@ describe('with minimal configuration the construct', () => {
         'nodejs14.x',
         'nodejs16.x',
         'nodejs18.x',
+        'nodejs20.x',
       ],
     });
   });
@@ -41,9 +42,12 @@ describe('for layerVersionName configuration the construct', () => {
       layerVersionName: 'mySpecialName',
     });
 
-    Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      LayerName: 'mySpecialName',
-    });
+    Template.fromStack(stack).hasResourceProperties(
+      'AWS::Lambda::LayerVersion',
+      {
+        LayerName: 'mySpecialName',
+      },
+    );
   });
 });
 
@@ -56,31 +60,42 @@ describe('with version configuration the construct', () => {
       version: version,
     });
 
-
-    Template.fromStack(stack).hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: `Powertools for AWS Lambda (TypeScript) [x86_64] version ${version}`,
-    });
+    Template.fromStack(stack).hasResourceProperties(
+      'AWS::Lambda::LayerVersion',
+      {
+        Description: `Powertools for AWS Lambda (TypeScript) [x86_64] version ${version}`,
+      },
+    );
   });
 
   test('fails with invalid version', () => {
     const stack = new Stack();
-    expect(() => new LambdaPowertoolsLayer(stack, 'PowertoolsLayerBadVersion', {
-      runtimeFamily: RuntimeFamily.NODEJS,
-      version: '12.222.21123',
-    })).toThrow();
+    expect(
+      () =>
+        new LambdaPowertoolsLayer(stack, 'PowertoolsLayerBadVersion', {
+          runtimeFamily: RuntimeFamily.NODEJS,
+          version: '12.222.21123',
+        }),
+    ).toThrow();
   });
 
-
   test('returns  version with @ when provided provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.NODEJS, undefined, '0.9.0');
+    const args = LambdaPowertoolsLayer.constructBuildArgs(
+      RuntimeFamily.NODEJS,
+      undefined,
+      '0.9.0',
+    );
 
     expect(args).toEqual('@0.9.0');
   });
 
   test('returns empty when no version provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(RuntimeFamily.NODEJS, undefined, undefined);
+    const args = LambdaPowertoolsLayer.constructBuildArgs(
+      RuntimeFamily.NODEJS,
+      undefined,
+      undefined,
+    );
 
     expect(args).toEqual('');
   });
-
 });
