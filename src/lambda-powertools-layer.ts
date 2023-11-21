@@ -139,7 +139,6 @@ function getRuntimesFromRuntimeFamily(
       ];
     case lambda.RuntimeFamily.NODEJS:
       return [
-        lambda.Runtime.NODEJS_12_X,
         lambda.Runtime.NODEJS_14_X,
         lambda.Runtime.NODEJS_16_X,
         lambda.Runtime.NODEJS_18_X,
