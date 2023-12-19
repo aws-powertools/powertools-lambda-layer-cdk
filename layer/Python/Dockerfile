@@ -34,14 +34,14 @@ RUN pip install --upgrade pip wheel && pip install --upgrade cython
 RUN CFLAGS="-Os -g0 -s" pip install --no-binary pydantic==1.* -t /asset/python "aws-lambda-powertools$PACKAGE_SUFFIX"
 
 # Removing nonessential files
-RUN cd /asset && \
+RUN cd /asset/python && \
   # remove boto3 and botocore (already available in Lambda Runtime)
-  rm -rf python/boto* && \
+  rm -rf boto* && \
   # remove boto3 dependencies
-  rm -rf python/s3transfer* python/*dateutil* python/urllib3* python/six* python/jmespath* && \
+  rm -rf s3transfer* *dateutil* urllib3* six* jmespath* && \
   # remove debugging symbols
-  find python -name '*.so' -type f -exec strip "{}" \; && \
+  find . -name '*.so' -type f -exec strip "{}" \; && \
   # remove tests
-  find python -wholename "*/tests/*" -type f -delete && \
+  find . -wholename "*/tests/*" -type f -delete && \
   # remove python bytecode
-  find python -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
+  find . -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
