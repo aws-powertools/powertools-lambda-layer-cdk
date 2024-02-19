@@ -108,11 +108,9 @@ export class LambdaPowertoolsLayer extends lambda.LayerVersion {
       license: 'MIT-0',
       compatibleRuntimes: getRuntimesFromRuntimeFamily(runtimeFamily),
       description:
-        `Powertools for AWS Lambda (${languageName}) [${compatibleArchitecturesDescription}]${
-          props?.includeExtras ? ' with extra dependencies' : ''
-        } ${
-          props?.version ? `version ${props?.version}` : 'latest version'
-        }`.trim(),
+        `Powertools for AWS Lambda (${languageName}) [${compatibleArchitecturesDescription}]${props?.includeExtras ? ' with extra dependencies' : ''
+          } ${props?.version ? `version ${props?.version}` : 'latest version'
+          }`.trim(),
       // Dear reader: I'm happy that you've stumbled upon this line too! You might wonder, why are we doing this and passing `undefined` when the list is empty?
       // Answer: on regions that don't support ARM64 Lambdas, we can't use the `compatibleArchitectures` parameter. Otherwise CloudFormation will bail with an error.
       // So if this construct is called with en empty list of architectures, just pass undefined down to the CDK construct.
@@ -139,6 +137,7 @@ function getRuntimesFromRuntimeFamily(
       ];
     case lambda.RuntimeFamily.NODEJS:
       return [
+        lambda.Runtime.NODEJS_12_X,
         lambda.Runtime.NODEJS_14_X,
         lambda.Runtime.NODEJS_16_X,
         lambda.Runtime.NODEJS_18_X,
