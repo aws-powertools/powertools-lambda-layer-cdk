@@ -20,7 +20,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   typescriptVersion: '5.3.x',
   cdkVersion: '2.108.1',
   defaultReleaseBranch: 'main',
-  minNodeVersion: '16.19.1',
+  minNodeVersion: '18.18.2',
   majorVersion: 3,
   name: 'cdk-aws-lambda-powertools-layer',
   repositoryUrl:
