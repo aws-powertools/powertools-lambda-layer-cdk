@@ -22,7 +22,6 @@ describe('with no configuration the construct', () => {
   test('matches the python 3.x runtimes', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
       CompatibleRuntimes: [
-        'python3.7',
         'python3.8',
         'python3.9',
         'python3.10',

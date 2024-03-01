@@ -25,8 +25,6 @@ describe('with minimal configuration the construct', () => {
   test('matches the nodejs runtimes', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
       CompatibleRuntimes: [
-        'nodejs12.x',
-        'nodejs14.x',
         'nodejs16.x',
         'nodejs18.x',
         'nodejs20.x',
