@@ -1,7 +1,9 @@
 const { awscdk } = require('projen');
 const project = new awscdk.AwsCdkConstructLibrary({
+  author: 'Amazon Web Services',
   authorName: 'Amazon Web Services',
   authorUrl: 'https://aws.amazon.com',
+  authorAddress: '',
   authorOrganization: true,
   keywords: [
     'aws',
@@ -14,17 +16,19 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'typescript',
     'nodejs',
   ],
+  jsiiVersion: '5.3.x',
+  typescriptVersion: '5.3.x',
   cdkVersion: '2.108.1',
   defaultReleaseBranch: 'main',
-  minNodeVersion: '16.19.1',
+  minNodeVersion: '18.18.2',
   majorVersion: 3,
   name: 'cdk-aws-lambda-powertools-layer',
   repositoryUrl:
     'https://github.com/awslabs/cdk-aws-lambda-powertools-layer.git',
   description: 'Powertools for AWS Lambda layer for python and typescript',
-  devDeps: [
-    '@types/prettier@2.6.0', // pin until breaking changes is resolved: https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/60310
-  ],
+  jestOptions: {
+    jestVersion: '29',
+  },
   github: false,
   publishToPypi: {
     distName: 'cdk-aws-lambda-powertools-layer',
