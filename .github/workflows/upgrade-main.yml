@@ -33,7 +33,7 @@ jobs:
           name: .repo.patch
           path: .repo.patch
     container:
-      image: jsii/superchain:1-buster-slim-node16
+      image: public.ecr.aws/jsii/superchain:1-bullseye-slim-node20
   pr:
     name: Create Pull Request
     needs: upgrade
