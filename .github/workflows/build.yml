@@ -38,6 +38,8 @@ jobs:
           install: true
           driver: docker
           platforms: linux/amd64,linux/arm64
+      - name: Checking space
+        run: df -h
       - name: Install dependencies
         run: yarn install --check-files
       - name: build
