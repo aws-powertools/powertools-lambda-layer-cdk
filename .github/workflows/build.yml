@@ -46,27 +46,6 @@ jobs:
         run: |
           chown -R $(whoami) $(pwd)
           npx projen build
-      - id: self_mutation
-        name: Find mutations
-        run: >-
-          git add .
-
-          git diff --staged --patch --exit-code > .repo.patch || echo "::set-output name=self_mutation_happened::true"
-      - if: steps.self_mutation.outputs.self_mutation_happened
-        name: Upload patch
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
-        with:
-          name: .repo.patch
-          path: .repo.patch
-      - name: Fail build on mutation
-        if: steps.self_mutation.outputs.self_mutation_happened
-        run: >-
-          echo "::error::Files were changed during build (see build log). If
-          this was triggered from a fork, you will need to update your branch."
-
-          cat .repo.patch
-
-          exit 1
       - name: Upload artifact
         uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
@@ -112,7 +91,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions: {}
-    if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
@@ -134,7 +112,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions: {}
-    if: "! needs.build.outputs.self_mutation_happened"
     steps:
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
