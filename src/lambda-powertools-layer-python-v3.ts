@@ -12,10 +12,26 @@ import {
  * Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
  */
 
+
+export interface PowertoolsPythonLayerProps extends PowertoolsLayerProps {
+
+  /**
+   * The Python version for Powertools for AWS Lambda (Python) V3.
+   * Allowed values:
+   *    Runtime.PYTHON_3_8
+   *    Runtime.PYTHON_3_9
+   *    Runtime.PYTHON_3_10
+   *    Runtime.PYTHON_3_11
+   *    Runtime.PYTHON_3_12
+   */
+  readonly pythonVersion?: lambda.Runtime;
+}
+
+
 export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
   /** CDK Layer for Python v3 **/
 
-  constructor(scope: Construct, id: string, props?: PowertoolsLayerProps) {
+  constructor(scope: Construct, id: string, props?: PowertoolsPythonLayerProps) {
     const languageName = 'Python';
     const dockerFilePath = path.join(__dirname, `../layer/${languageName}v3`);
     const compatibleArchitectures = props?.compatibleArchitectures ?? [
@@ -24,6 +40,18 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
     const compatibleArchitecturesDescription = compatibleArchitectures
       .map((arch) => arch.name)
       .join(', ');
+
+    const validPythonVersions = new Set([
+      Runtime.PYTHON_3_8,
+      Runtime.PYTHON_3_9,
+      Runtime.PYTHON_3_10,
+      Runtime.PYTHON_3_11,
+      Runtime.PYTHON_3_12,
+    ]);
+
+    if (props?.pythonVersion && !validPythonVersions.has(props.pythonVersion)) {
+      throw new Error('pythonVersion must be a valid Python Runtime');
+    }
 
     // We need to remove the Python word to send to the container only the version
     let pythonVersionNormalized = props?.pythonVersion?.toString() ?? Runtime.PYTHON_3_12.toString();

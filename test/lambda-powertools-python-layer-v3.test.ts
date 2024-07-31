@@ -116,6 +116,7 @@ describe('for layerVersionName configuraiton the construct', () => {
   test('synthisizes to a layer with provided name', () => {
     const stack = new Stack();
     new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       layerVersionName: 'mySpecialName',
     });
 
@@ -128,10 +129,26 @@ describe('for layerVersionName configuraiton the construct', () => {
   });
 });
 
+describe('with invalid python runtime', () => {
+  test('fails with invalid version', () => {
+    const stack = new Stack();
+    expect(
+      () =>
+        new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerBadVersion', {
+          runtimeFamily: RuntimeFamily.PYTHON,
+          version: '0.0.0',
+          pythonVersion: Runtime.NODEJS_18_X,
+        }),
+    ).toThrow(/pythonVersion must be a valid Python Runtime/);
+  });
+
+});
+
 describe('with version configuration the construct', () => {
   test('synthesizes to a layer with specific valid version', () => {
     const stack = new Stack();
     new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       version: '1.21.0',
     });
 
@@ -149,6 +166,7 @@ describe('with version configuration the construct', () => {
     expect(
       () =>
         new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerBadVersion', {
+          runtimeFamily: RuntimeFamily.PYTHON,
           version: '0.0.0',
         }),
     ).toThrow(/docker exited with status 1/);
@@ -157,6 +175,7 @@ describe('with version configuration the construct', () => {
   test('synthesizes with pydantic and specific version', () => {
     const stack = new Stack();
     new LambdaPowertoolsLayerPythonV3(stack, 'LayerExtrasVersion', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       includeExtras: true,
       version: '2.40.0',
     });
@@ -173,6 +192,7 @@ describe('with version configuration the construct', () => {
   test('synthesizes with extras and latest version', () => {
     const stack = new Stack();
     new LambdaPowertoolsLayerPythonV3(stack, 'LayerExtrasNoVersion', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       includeExtras: true,
     });
 
