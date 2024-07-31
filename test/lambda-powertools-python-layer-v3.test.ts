@@ -1,6 +1,6 @@
 import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { Architecture, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, Runtime, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
 import { LambdaPowertoolsLayerPythonV3, constructBuildArgs } from '../src';
 
 describe('with no configuration the construct', () => {
@@ -33,7 +33,7 @@ describe('with python 3.8 version', () => {
   new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
     runtimeFamily: RuntimeFamily.PYTHON,
     compatibleArchitectures: [Architecture.X86_64],
-    pythonVersion: '3.8',
+    pythonVersion: Runtime.PYTHON_3_8,
   });
   const template = Template.fromStack(stack);
   test('matches the default python 3.8 runtimes', () => {
@@ -50,7 +50,7 @@ describe('with python 3.9 version', () => {
   new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
     runtimeFamily: RuntimeFamily.PYTHON,
     compatibleArchitectures: [Architecture.X86_64],
-    pythonVersion: '3.9',
+    pythonVersion: Runtime.PYTHON_3_9,
   });
   const template = Template.fromStack(stack);
   test('matches the default python 3.9 runtimes', () => {
@@ -67,7 +67,7 @@ describe('with python 3.10 version', () => {
   new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
     runtimeFamily: RuntimeFamily.PYTHON,
     compatibleArchitectures: [Architecture.X86_64],
-    pythonVersion: '3.10',
+    pythonVersion: Runtime.PYTHON_3_10,
   });
   const template = Template.fromStack(stack);
   test('matches the default python 3.10 runtimes', () => {
@@ -85,7 +85,7 @@ describe('with python 3.11 version', () => {
   new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
     runtimeFamily: RuntimeFamily.PYTHON,
     compatibleArchitectures: [Architecture.X86_64],
-    pythonVersion: '3.11',
+    pythonVersion: Runtime.PYTHON_3_11,
   });
   const template = Template.fromStack(stack);
   test('matches the default python 3.11 runtimes', () => {
