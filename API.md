@@ -116,7 +116,6 @@ permission on the layer version.
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.fromLayerVersionArn">fromLayerVersionArn</a></code> | Imports a layer version by ARN. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.fromLayerVersionAttributes">fromLayerVersionAttributes</a></code> | Imports a Layer that has been defined externally. |
-| <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.constructBuildArgs">constructBuildArgs</a></code> | creates build argument for the Dockerfile. |
 
 ---
 
@@ -234,39 +233,6 @@ the properties of the imported layer.
 
 ---
 
-##### `constructBuildArgs` <a name="constructBuildArgs" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.constructBuildArgs"></a>
-
-```typescript
-import { LambdaPowertoolsLayer } from 'cdk-aws-lambda-powertools-layer'
-
-LambdaPowertoolsLayer.constructBuildArgs(runtimeFamily: RuntimeFamily, includeExtras?: boolean, version?: string)
-```
-
-creates build argument for the Dockerfile.
-
-There are multiple combinations between version and extras package that results in different suffix for the installation.
-With and without version, with and without extras flag.
-We construct one suffix here because it is easier to do in code than inside the Dockerfile with bash commands.
-For example, if we set `includeExtras=true` and `version=1.22.0` we get '[all]==1.22.0'.
-
-###### `runtimeFamily`<sup>Required</sup> <a name="runtimeFamily" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.constructBuildArgs.parameter.runtimeFamily"></a>
-
-- *Type:* aws-cdk-lib.aws_lambda.RuntimeFamily
-
----
-
-###### `includeExtras`<sup>Optional</sup> <a name="includeExtras" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.constructBuildArgs.parameter.includeExtras"></a>
-
-- *Type:* boolean
-
----
-
-###### `version`<sup>Optional</sup> <a name="version" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayer.constructBuildArgs.parameter.version"></a>
-
-- *Type:* string
-
----
-
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
@@ -348,6 +314,8 @@ The runtimes compatible with this Layer.
 
 
 ### LambdaPowertoolsLayerPythonV3 <a name="LambdaPowertoolsLayerPythonV3" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3"></a>
+
+Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
 
 #### Initializers <a name="Initializers" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer"></a>
 
@@ -459,7 +427,6 @@ permission on the layer version.
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.fromLayerVersionArn">fromLayerVersionArn</a></code> | Imports a layer version by ARN. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.fromLayerVersionAttributes">fromLayerVersionAttributes</a></code> | Imports a Layer that has been defined externally. |
-| <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.constructBuildArgs">constructBuildArgs</a></code> | CDK Layer for Python v3 *. |
 
 ---
 
@@ -574,28 +541,6 @@ the id of the imported layer in the construct tree.
 - *Type:* aws-cdk-lib.aws_lambda.LayerVersionAttributes
 
 the properties of the imported layer.
-
----
-
-##### `constructBuildArgs` <a name="constructBuildArgs" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.constructBuildArgs"></a>
-
-```typescript
-import { LambdaPowertoolsLayerPythonV3 } from 'cdk-aws-lambda-powertools-layer'
-
-LambdaPowertoolsLayerPythonV3.constructBuildArgs(includeExtras?: boolean, version?: string)
-```
-
-CDK Layer for Python v3 *.
-
-###### `includeExtras`<sup>Optional</sup> <a name="includeExtras" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.constructBuildArgs.parameter.includeExtras"></a>
-
-- *Type:* boolean
-
----
-
-###### `version`<sup>Optional</sup> <a name="version" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.constructBuildArgs.parameter.version"></a>
-
-- *Type:* string
 
 ---
 

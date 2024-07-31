@@ -1,7 +1,7 @@
 import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
-import { LambdaPowertoolsLayer } from '../src';
+import { LambdaPowertoolsLayer, constructBuildArgs } from '../src';
 
 describe('with minimal configuration the construct', () => {
   const stack = new Stack();
@@ -78,7 +78,7 @@ describe('with version configuration the construct', () => {
   });
 
   test('returns  version with @ when provided provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.NODEJS,
       undefined,
       '0.9.0',
@@ -88,7 +88,7 @@ describe('with version configuration the construct', () => {
   });
 
   test('returns empty when no version provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.NODEJS,
       undefined,
       undefined,

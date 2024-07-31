@@ -1,7 +1,7 @@
 import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { Architecture, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
-import { LambdaPowertoolsLayer } from '../src';
+import { LambdaPowertoolsLayer, constructBuildArgs } from '../src';
 
 describe('with no configuration the construct', () => {
   const stack = new Stack();
@@ -123,7 +123,7 @@ describe('with version configuration the construct', () => {
 
 describe('construct build args for Dockerfile', () => {
   test('returns extras and version', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.PYTHON,
       true,
       '1.21.0',
@@ -133,7 +133,7 @@ describe('construct build args for Dockerfile', () => {
   });
 
   test('returns only extras when no version provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.PYTHON,
       true,
       undefined,
@@ -145,7 +145,7 @@ describe('construct build args for Dockerfile', () => {
   test('returns a git url with extras when a git url is provided', () => {
     const version =
       'git+https://github.com/awslabs/aws-lambda-powertools-python@v2';
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.PYTHON,
       true,
       version,
@@ -155,7 +155,7 @@ describe('construct build args for Dockerfile', () => {
   });
 
   test('returns only version when no extras flag provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.PYTHON,
       undefined,
       '1.11.0',
@@ -165,7 +165,7 @@ describe('construct build args for Dockerfile', () => {
   });
 
   test('returns empty when no version and extras provided', () => {
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.PYTHON,
       undefined,
       undefined,
@@ -177,7 +177,7 @@ describe('construct build args for Dockerfile', () => {
   test('returns a git url when a git url is provided and extras provided', () => {
     const version =
       'git+https://github.com/awslabs/aws-lambda-powertools-python@v2';
-    const args = LambdaPowertoolsLayer.constructBuildArgs(
+    const args = constructBuildArgs(
       RuntimeFamily.PYTHON,
       false,
       version,
