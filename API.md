@@ -315,21 +315,19 @@ The runtimes compatible with this Layer.
 
 ### LambdaPowertoolsLayerPythonV3 <a name="LambdaPowertoolsLayerPythonV3" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3"></a>
 
-Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
-
 #### Initializers <a name="Initializers" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer"></a>
 
 ```typescript
 import { LambdaPowertoolsLayerPythonV3 } from 'cdk-aws-lambda-powertools-layer'
 
-new LambdaPowertoolsLayerPythonV3(scope: Construct, id: string, props?: PowertoolsLayerProps)
+new LambdaPowertoolsLayerPythonV3(scope: Construct, id: string, props?: PowertoolsPythonLayerProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
 | <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps">PowertoolsLayerProps</a></code> | *No description.* |
+| <code><a href="#cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer.parameter.props">props</a></code> | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps">PowertoolsPythonLayerProps</a></code> | *No description.* |
 
 ---
 
@@ -347,7 +345,7 @@ new LambdaPowertoolsLayerPythonV3(scope: Construct, id: string, props?: Powertoo
 
 ##### `props`<sup>Optional</sup> <a name="props" id="cdk-aws-lambda-powertools-layer.LambdaPowertoolsLayerPythonV3.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps">PowertoolsLayerProps</a>
+- *Type:* <a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps">PowertoolsPythonLayerProps</a>
 
 ---
 
@@ -645,7 +643,6 @@ const powertoolsLayerProps: PowertoolsLayerProps = { ... }
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.compatibleArchitectures">compatibleArchitectures</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture[]</code> | The compatible architectures for the layer. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.includeExtras">includeExtras</a></code> | <code>boolean</code> | A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.layerVersionName">layerVersionName</a></code> | <code>string</code> | the name of the layer, will be randomised if empty. |
-| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.pythonVersion">pythonVersion</a></code> | <code>aws-cdk-lib.aws_lambda.Runtime</code> | The Python version for Powertools for AWS Lambda (Python) V3. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.runtimeFamily">runtimeFamily</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeFamily</code> | the runtime of the layer. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.version">version</a></code> | <code>string</code> | The Powertools for AWS Lambda package version from pypi repository. |
 
@@ -687,18 +684,6 @@ the name of the layer, will be randomised if empty.
 
 ---
 
-##### `pythonVersion`<sup>Optional</sup> <a name="pythonVersion" id="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.pythonVersion"></a>
-
-```typescript
-public readonly pythonVersion: Runtime;
-```
-
-- *Type:* aws-cdk-lib.aws_lambda.Runtime
-
-The Python version for Powertools for AWS Lambda (Python) V3.
-
----
-
 ##### `runtimeFamily`<sup>Optional</sup> <a name="runtimeFamily" id="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.runtimeFamily"></a>
 
 ```typescript
@@ -720,6 +705,110 @@ public readonly version: string;
 - *Type:* string
 
 The Powertools for AWS Lambda package version from pypi repository.
+
+---
+
+### PowertoolsPythonLayerProps <a name="PowertoolsPythonLayerProps" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps"></a>
+
+Defines a new Lambda Layer with Powertools for AWS Lambda (Python) library.
+
+#### Initializer <a name="Initializer" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.Initializer"></a>
+
+```typescript
+import { PowertoolsPythonLayerProps } from 'cdk-aws-lambda-powertools-layer'
+
+const powertoolsPythonLayerProps: PowertoolsPythonLayerProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.compatibleArchitectures">compatibleArchitectures</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture[]</code> | The compatible architectures for the layer. |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.includeExtras">includeExtras</a></code> | <code>boolean</code> | A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it. |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.layerVersionName">layerVersionName</a></code> | <code>string</code> | the name of the layer, will be randomised if empty. |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.runtimeFamily">runtimeFamily</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeFamily</code> | the runtime of the layer. |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.version">version</a></code> | <code>string</code> | The Powertools for AWS Lambda package version from pypi repository. |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.pythonVersion">pythonVersion</a></code> | <code>aws-cdk-lib.aws_lambda.Runtime</code> | The Python version for Powertools for AWS Lambda (Python) V3. |
+
+---
+
+##### `compatibleArchitectures`<sup>Optional</sup> <a name="compatibleArchitectures" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.compatibleArchitectures"></a>
+
+```typescript
+public readonly compatibleArchitectures: Architecture[];
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.Architecture[]
+
+The compatible architectures for the layer.
+
+---
+
+##### `includeExtras`<sup>Optional</sup> <a name="includeExtras" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.includeExtras"></a>
+
+```typescript
+public readonly includeExtras: boolean;
+```
+
+- *Type:* boolean
+
+A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it.
+
+---
+
+##### `layerVersionName`<sup>Optional</sup> <a name="layerVersionName" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.layerVersionName"></a>
+
+```typescript
+public readonly layerVersionName: string;
+```
+
+- *Type:* string
+
+the name of the layer, will be randomised if empty.
+
+---
+
+##### `runtimeFamily`<sup>Optional</sup> <a name="runtimeFamily" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.runtimeFamily"></a>
+
+```typescript
+public readonly runtimeFamily: RuntimeFamily;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.RuntimeFamily
+
+the runtime of the layer.
+
+---
+
+##### `version`<sup>Optional</sup> <a name="version" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.version"></a>
+
+```typescript
+public readonly version: string;
+```
+
+- *Type:* string
+
+The Powertools for AWS Lambda package version from pypi repository.
+
+---
+
+##### `pythonVersion`<sup>Optional</sup> <a name="pythonVersion" id="cdk-aws-lambda-powertools-layer.PowertoolsPythonLayerProps.property.pythonVersion"></a>
+
+```typescript
+public readonly pythonVersion: Runtime;
+```
+
+- *Type:* aws-cdk-lib.aws_lambda.Runtime
+
+The Python version for Powertools for AWS Lambda (Python) V3.
+
+Allowed values:
+   Runtime.PYTHON_3_8
+   Runtime.PYTHON_3_9
+   Runtime.PYTHON_3_10
+   Runtime.PYTHON_3_11
+   Runtime.PYTHON_3_12
 
 ---
 
