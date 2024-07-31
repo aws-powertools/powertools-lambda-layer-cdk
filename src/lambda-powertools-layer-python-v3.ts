@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { aws_lambda as lambda } from 'aws-cdk-lib';
+import { Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import { PowertoolsLayerProps } from './lambda-powertools-layer-props';
 import {
@@ -17,7 +18,6 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
   constructor(scope: Construct, id: string, props?: PowertoolsLayerProps) {
     const languageName = 'Python';
     const dockerFilePath = path.join(__dirname, `../layer/${languageName}v3`);
-    let runtimeFamilyPerVersion;
     const compatibleArchitectures = props?.compatibleArchitectures ?? [
       lambda.Architecture.X86_64,
     ];
@@ -25,19 +25,9 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
       .map((arch) => arch.name)
       .join(', ');
 
-    if (props?.pythonVersion == '3.8') {
-      runtimeFamilyPerVersion = lambda.Runtime.PYTHON_3_8;
-    } else if (props?.pythonVersion == '3.9') {
-      runtimeFamilyPerVersion = lambda.Runtime.PYTHON_3_9;
-    } else if (props?.pythonVersion == '3.10') {
-      runtimeFamilyPerVersion = lambda.Runtime.PYTHON_3_10;
-    } else if (props?.pythonVersion == '3.11') {
-      runtimeFamilyPerVersion = lambda.Runtime.PYTHON_3_11;
-    } else if (props?.pythonVersion == '3.12') {
-      runtimeFamilyPerVersion = lambda.Runtime.PYTHON_3_12;
-    } else {
-      runtimeFamilyPerVersion = lambda.Runtime.PYTHON_3_12;
-    }
+    // We need to remove the Python word to send to the container only the version
+    let pythonVersionNormalized = props?.pythonVersion?.toString() ?? Runtime.PYTHON_3_12.toString();
+    pythonVersionNormalized = pythonVersionNormalized.replace('python', '');
 
     console.log(`path ${dockerFilePath}`);
     super(scope, id, {
@@ -48,7 +38,7 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
             props?.includeExtras,
             props?.version,
           ),
-          PYTHON_VERSION: props?.pythonVersion ?? '3.12',
+          PYTHON_VERSION: pythonVersionNormalized,
         },
         // supports cross-platform docker build
         platform: getDockerPlatformNameFromArchitectures(
@@ -57,7 +47,7 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
       }),
       layerVersionName: props?.layerVersionName || undefined,
       license: 'MIT-0',
-      compatibleRuntimes: [runtimeFamilyPerVersion],
+      compatibleRuntimes: [props?.pythonVersion || Runtime.PYTHON_3_12],
       description:
         `Powertools for AWS Lambda (Python) V3 [${compatibleArchitecturesDescription}]${props?.includeExtras ? ' with extra dependencies' : ''
         } ${props?.version ? `version ${props?.version}` : 'latest version'

@@ -645,7 +645,7 @@ const powertoolsLayerProps: PowertoolsLayerProps = { ... }
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.compatibleArchitectures">compatibleArchitectures</a></code> | <code>aws-cdk-lib.aws_lambda.Architecture[]</code> | The compatible architectures for the layer. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.includeExtras">includeExtras</a></code> | <code>boolean</code> | A flag for the extras dependencies (pydantic, aws-xray-sdk, etc.) This will increase the size of the layer significantly. If you don't use parsing, ignore it. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.layerVersionName">layerVersionName</a></code> | <code>string</code> | the name of the layer, will be randomised if empty. |
-| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.pythonVersion">pythonVersion</a></code> | <code>string</code> | The Python version for Powertools for AWS Lambda (Python) V3. |
+| <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.pythonVersion">pythonVersion</a></code> | <code>aws-cdk-lib.aws_lambda.Runtime</code> | The Python version for Powertools for AWS Lambda (Python) V3. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.runtimeFamily">runtimeFamily</a></code> | <code>aws-cdk-lib.aws_lambda.RuntimeFamily</code> | the runtime of the layer. |
 | <code><a href="#cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.version">version</a></code> | <code>string</code> | The Powertools for AWS Lambda package version from pypi repository. |
 
@@ -690,10 +690,10 @@ the name of the layer, will be randomised if empty.
 ##### `pythonVersion`<sup>Optional</sup> <a name="pythonVersion" id="cdk-aws-lambda-powertools-layer.PowertoolsLayerProps.property.pythonVersion"></a>
 
 ```typescript
-public readonly pythonVersion: string;
+public readonly pythonVersion: Runtime;
 ```
 
-- *Type:* string
+- *Type:* aws-cdk-lib.aws_lambda.Runtime
 
 The Python version for Powertools for AWS Lambda (Python) V3.
 

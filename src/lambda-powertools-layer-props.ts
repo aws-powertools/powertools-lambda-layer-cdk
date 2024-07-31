@@ -32,5 +32,9 @@ export interface PowertoolsLayerProps {
   /**
      * The Python version for Powertools for AWS Lambda (Python) V3.
     */
-  readonly pythonVersion?: string;
+  readonly pythonVersion?: typeof lambda.Runtime.PYTHON_3_8 |
+                           typeof lambda.Runtime.PYTHON_3_9 |
+                           typeof lambda.Runtime.PYTHON_3_10 |
+                           typeof lambda.Runtime.PYTHON_3_11 |
+                           typeof lambda.Runtime.PYTHON_3_12;
 }
