@@ -3,7 +3,7 @@ on:
   workflow_dispatch: {}
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: aws-powertools_ubuntu-latest_8-core
     permissions:
       contents: write
     outputs:
