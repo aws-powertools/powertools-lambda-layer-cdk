@@ -23,6 +23,9 @@ jobs:
           git config user.email "github-actions@github.com"
       - name: give user docker permission so we can run tests
         run: sudo chown $(whoami) /var/run/docker.sock
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        with:
+          node-version: 20
       - name: Set up QEMU
         uses: docker/setup-qemu-action@e81a89b1732b9c48d79cd809d8d81d79c4647a18 # v2.0.0
         with:
