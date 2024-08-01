@@ -1,15 +1,15 @@
 import { Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
-import { Architecture, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
-import { LambdaPowertoolsLayer, constructBuildArgs } from '../src';
+import { Architecture, Runtime, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
+import { LambdaPowertoolsLayerPythonV3, constructBuildArgs } from '../src';
 
 describe('with no configuration the construct', () => {
   const stack = new Stack();
-  new LambdaPowertoolsLayer(stack, 'PowertoolsLayer');
+  new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3');
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Powertools for AWS Lambda (Python) [x86_64] latest version',
+      Description: 'Powertools for AWS Lambda (Python) V3 [x86_64] latest version',
     });
   });
 
@@ -19,14 +19,79 @@ describe('with no configuration the construct', () => {
     });
   });
 
-  test('matches the python 3.x runtimes', () => {
+  test('matches the default python 3.12 runtimes', () => {
+    template.hasResourceProperties('AWS::Lambda::LayerVersion', {
+      CompatibleRuntimes: [
+        'python3.12',
+      ],
+    });
+  });
+});
+
+describe('with python 3.8 version', () => {
+  const stack = new Stack();
+  new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+    runtimeFamily: RuntimeFamily.PYTHON,
+    compatibleArchitectures: [Architecture.X86_64],
+    pythonVersion: Runtime.PYTHON_3_8,
+  });
+  const template = Template.fromStack(stack);
+  test('matches the default python 3.8 runtimes', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
       CompatibleRuntimes: [
         'python3.8',
+      ],
+    });
+  });
+});
+
+describe('with python 3.9 version', () => {
+  const stack = new Stack();
+  new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+    runtimeFamily: RuntimeFamily.PYTHON,
+    compatibleArchitectures: [Architecture.X86_64],
+    pythonVersion: Runtime.PYTHON_3_9,
+  });
+  const template = Template.fromStack(stack);
+  test('matches the default python 3.9 runtimes', () => {
+    template.hasResourceProperties('AWS::Lambda::LayerVersion', {
+      CompatibleRuntimes: [
         'python3.9',
+      ],
+    });
+  });
+});
+
+describe('with python 3.10 version', () => {
+  const stack = new Stack();
+  new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+    runtimeFamily: RuntimeFamily.PYTHON,
+    compatibleArchitectures: [Architecture.X86_64],
+    pythonVersion: Runtime.PYTHON_3_10,
+  });
+  const template = Template.fromStack(stack);
+  test('matches the default python 3.10 runtimes', () => {
+    template.hasResourceProperties('AWS::Lambda::LayerVersion', {
+      CompatibleRuntimes: [
         'python3.10',
+      ],
+    });
+  });
+});
+
+
+describe('with python 3.11 version', () => {
+  const stack = new Stack();
+  new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+    runtimeFamily: RuntimeFamily.PYTHON,
+    compatibleArchitectures: [Architecture.X86_64],
+    pythonVersion: Runtime.PYTHON_3_11,
+  });
+  const template = Template.fromStack(stack);
+  test('matches the default python 3.11 runtimes', () => {
+    template.hasResourceProperties('AWS::Lambda::LayerVersion', {
+      CompatibleRuntimes: [
         'python3.11',
-        'python3.12',
       ],
     });
   });
@@ -34,14 +99,14 @@ describe('with no configuration the construct', () => {
 
 describe('with arm64 architecture', () => {
   const stack = new Stack();
-  new LambdaPowertoolsLayer(stack, 'PowertoolsLayer', {
+  new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
     runtimeFamily: RuntimeFamily.PYTHON,
     compatibleArchitectures: [Architecture.ARM_64],
   });
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Powertools for AWS Lambda (Python) [arm64] latest version',
+      Description: 'Powertools for AWS Lambda (Python) V3 [arm64] latest version',
       CompatibleArchitectures: ['arm64'],
     });
   });
@@ -50,7 +115,8 @@ describe('with arm64 architecture', () => {
 describe('for layerVersionName configuraiton the construct', () => {
   test('synthisizes to a layer with provided name', () => {
     const stack = new Stack();
-    new LambdaPowertoolsLayer(stack, 'PowertoolsLayer', {
+    new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       layerVersionName: 'mySpecialName',
     });
 
@@ -63,10 +129,26 @@ describe('for layerVersionName configuraiton the construct', () => {
   });
 });
 
+describe('with invalid python runtime', () => {
+  test('fails with invalid version', () => {
+    const stack = new Stack();
+    expect(
+      () =>
+        new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerBadVersion', {
+          runtimeFamily: RuntimeFamily.PYTHON,
+          version: '0.0.0',
+          pythonVersion: Runtime.NODEJS_18_X,
+        }),
+    ).toThrow(/pythonVersion must be a valid Python Runtime/);
+  });
+
+});
+
 describe('with version configuration the construct', () => {
   test('synthesizes to a layer with specific valid version', () => {
     const stack = new Stack();
-    new LambdaPowertoolsLayer(stack, 'PowertoolsLayer', {
+    new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       version: '1.21.0',
     });
 
@@ -74,7 +156,7 @@ describe('with version configuration the construct', () => {
       'AWS::Lambda::LayerVersion',
       {
         Description:
-          'Powertools for AWS Lambda (Python) [x86_64] version 1.21.0',
+          'Powertools for AWS Lambda (Python) V3 [x86_64] version 1.21.0',
       },
     );
   });
@@ -83,31 +165,34 @@ describe('with version configuration the construct', () => {
     const stack = new Stack();
     expect(
       () =>
-        new LambdaPowertoolsLayer(stack, 'PowertoolsLayerBadVersion', {
+        new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerBadVersion', {
+          runtimeFamily: RuntimeFamily.PYTHON,
           version: '0.0.0',
         }),
     ).toThrow(/docker exited with status 1/);
   });
 
-  test('synthesizes with pynadtic and specific version', () => {
+  test('synthesizes with pydantic and specific version', () => {
     const stack = new Stack();
-    new LambdaPowertoolsLayer(stack, 'LayerExtrasVersion', {
+    new LambdaPowertoolsLayerPythonV3(stack, 'LayerExtrasVersion', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       includeExtras: true,
-      version: '1.22.0',
+      version: '2.40.0',
     });
 
     Template.fromStack(stack).hasResourceProperties(
       'AWS::Lambda::LayerVersion',
       {
         Description:
-          'Powertools for AWS Lambda (Python) [x86_64] with extra dependencies version 1.22.0',
+          'Powertools for AWS Lambda (Python) V3 [x86_64] with extra dependencies version 2.40.0',
       },
     );
   });
 
   test('synthesizes with extras and latest version', () => {
     const stack = new Stack();
-    new LambdaPowertoolsLayer(stack, 'LayerExtrasNoVersion', {
+    new LambdaPowertoolsLayerPythonV3(stack, 'LayerExtrasNoVersion', {
+      runtimeFamily: RuntimeFamily.PYTHON,
       includeExtras: true,
     });
 
@@ -115,7 +200,7 @@ describe('with version configuration the construct', () => {
       'AWS::Lambda::LayerVersion',
       {
         Description:
-          'Powertools for AWS Lambda (Python) [x86_64] with extra dependencies latest version',
+          'Powertools for AWS Lambda (Python) V3 [x86_64] with extra dependencies latest version',
       },
     );
   });

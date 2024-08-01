@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: aws-powertools_ubuntu-latest_8-core
     permissions:
       contents: write
     outputs:
@@ -38,6 +38,8 @@ jobs:
           install: true
           driver: docker
           platforms: linux/amd64,linux/arm64
+      - name: Checking space
+        run: df -h
       - name: Install dependencies
         run: yarn install --check-files
       - name: build
@@ -139,7 +141,7 @@ jobs:
           node-version: 20
       - uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
         with:
-          python-version: 3.12
+          python-version: 3.11
       - name: Download build artifacts
         uses: actions/download-artifact@87c55149d96e628cc2ef7e6fc2aab372015aec85 # v4.1.3
         with:
