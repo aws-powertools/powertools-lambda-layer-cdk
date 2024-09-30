@@ -77,7 +77,7 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
       license: 'MIT-0',
       compatibleRuntimes: [props?.pythonVersion || Runtime.PYTHON_3_12],
       description:
-        `Powertools for AWS Lambda (Python) V3 [${compatibleArchitecturesDescription}]${props?.includeExtras ? ' with extra dependencies' : ''
+        `Powertools for AWS Lambda (Python) V3 [${compatibleArchitecturesDescription} - Python ${pythonVersionNormalized}]${props?.includeExtras ? ' with extra dependencies' : ''
         } ${props?.version ? `version ${props?.version}` : 'latest version'
         }`.trim(),
       // Dear reader: I'm happy that you've stumbled upon this line too! You might wonder, why are we doing this and passing `undefined` when the list is empty?

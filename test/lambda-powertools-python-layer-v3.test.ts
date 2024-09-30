@@ -3,13 +3,15 @@ import { Template } from 'aws-cdk-lib/assertions';
 import { Architecture, Runtime, RuntimeFamily } from 'aws-cdk-lib/aws-lambda';
 import { LambdaPowertoolsLayerPythonV3, constructBuildArgs } from '../src';
 
+const defaultPythonVersion = 'Python 3.12';
+
 describe('with no configuration the construct', () => {
   const stack = new Stack();
   new LambdaPowertoolsLayerPythonV3(stack, 'PowertoolsLayerPythonV3');
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Powertools for AWS Lambda (Python) V3 [x86_64] latest version',
+      Description: `Powertools for AWS Lambda (Python) V3 [x86_64 - ${defaultPythonVersion}] latest version`,
     });
   });
 
@@ -106,7 +108,7 @@ describe('with arm64 architecture', () => {
   const template = Template.fromStack(stack);
   test('synthesizes successfully', () => {
     template.hasResourceProperties('AWS::Lambda::LayerVersion', {
-      Description: 'Powertools for AWS Lambda (Python) V3 [arm64] latest version',
+      Description: `Powertools for AWS Lambda (Python) V3 [arm64 - ${defaultPythonVersion}] latest version`,
       CompatibleArchitectures: ['arm64'],
     });
   });
@@ -156,7 +158,7 @@ describe('with version configuration the construct', () => {
       'AWS::Lambda::LayerVersion',
       {
         Description:
-          'Powertools for AWS Lambda (Python) V3 [x86_64] version 1.21.0',
+        `Powertools for AWS Lambda (Python) V3 [x86_64 - ${defaultPythonVersion}] version 1.21.0`,
       },
     );
   });
@@ -184,7 +186,7 @@ describe('with version configuration the construct', () => {
       'AWS::Lambda::LayerVersion',
       {
         Description:
-          'Powertools for AWS Lambda (Python) V3 [x86_64] with extra dependencies version 2.40.0',
+          `Powertools for AWS Lambda (Python) V3 [x86_64 - ${defaultPythonVersion}] with extra dependencies version 2.40.0`,
       },
     );
   });
@@ -200,7 +202,7 @@ describe('with version configuration the construct', () => {
       'AWS::Lambda::LayerVersion',
       {
         Description:
-          'Powertools for AWS Lambda (Python) V3 [x86_64] with extra dependencies latest version',
+          `Powertools for AWS Lambda (Python) V3 [x86_64 - ${defaultPythonVersion}] with extra dependencies latest version`,
       },
     );
   });
