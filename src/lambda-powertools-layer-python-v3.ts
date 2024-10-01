@@ -68,7 +68,7 @@ export class LambdaPowertoolsLayerPythonV3 extends lambda.LayerVersion {
           ),
           PYTHON_VERSION: pythonVersionNormalized,
         },
-        // supports cross-platform docker build
+        // supports cross-platform docker build using different Python versions
         platform: getDockerPlatformNameFromArchitectures(
           compatibleArchitectures,
         ),
