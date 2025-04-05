@@ -1,7 +1,5 @@
-> [!important]
-> This repository will be archived on April 5, 2025 together with the `cdk-aws-lambda-powertools-layer` CDK constructs for Python and Node.js
-
-Powertools for AWS will continue to provide official Lambda Layers for [Python](https://docs.powertools.aws.dev/lambda/python/latest/) and [TypeScript](https://docs.powertools.aws.dev/lambda/typescript/latest/) in all commercial regions and GovCloud, as well as future regions as they become available.
+> [!note]
+> Powertools for AWS will continue to provide official Lambda Layers for [Python](https://docs.powertools.aws.dev/lambda/python/latest/) and [TypeScript](https://docs.powertools.aws.dev/lambda/typescript/latest/) in all commercial regions and GovCloud, as well as future regions as they become available.
 
 ### Your options
 
